@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книги - Школьная библиотека</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
+            <nav class="main-nav">
+                <ul><li><a href="index.html">Главная</a></li><li><a href="https://sivukh-sosh.gosuslugi.ru/" target="_blank">Сайт школы</a></li><li><a href="books.html" class="active">Книги</a></li><li><a href="readers.html" class="admin-only">Читатели (для администратора)</a></li><li><a href="issue.html" class="admin-only">Выдача (для администратора)</a></li><li><a href="login.html" id="login-link">Вход</a></li><li><a href="rules.html">Правила</a></li><li><a href="contacts.html">Контакты</a></li></ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Книги</h2>
+
+        <div style="margin-bottom: 25px;">
+            <p><strong>Поиск:</strong> Название, автор или год</p>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <input type="text" id="searchInput" placeholder="Введите запрос..." style="flex: 1; min-width: 250px;">
+                <button id="searchBtn">Найти</button>
+            </div>
+        </div>
+
+        <div class="admin-only" style="margin-bottom: 20px;">
+            <button id="addBookBtn">+ Добавить книгу</button>
+            <span class="text-muted">(только для администратора)</span>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Год</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody id="booksTableBody">
+                <tr><td colspan="5" class="text-muted">Загрузка...</td></tr>
+            </tbody>
+        </table>
+
+        <p class="text-muted">Найдено книг: <span id="bookCount">0</span></p>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Школьная библиотека МКОУ «Сивухская СОШ». Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

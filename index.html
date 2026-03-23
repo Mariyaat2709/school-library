@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Школьная библиотека - Главная</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
+            <nav class="main-nav">
+                <ul><li><a href="index.html">Главная</a></li><li><a href="https://sivukh-sosh.gosuslugi.ru/" target="_blank">Сайт школы</a></li><li><a href="books.html">Книги</a></li><li><a href="readers.html" class="admin-only">Читатели (для администратора)</a></li><li><a href="issue.html" class="admin-only">Выдача (для администратора)</a></li><li><a href="login.html" id="login-link">Вход</a></li><li><a href="rules.html">Правила</a></li><li><a href="contacts.html">Контакты</a></li></ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Главная страница</h2>
+        
+        <section class="info-block">
+            <h3>Информация о библиотеке</h3>
+            <p><strong>Часы работы:</strong> Пн-Пт: 8:00 - 16:00</p>
+            <p><strong>Адрес:</strong> с. Сивуха, ул. Школьная, д. 1</p>
+            <p><strong>Библиотекарь:</strong> Петрова Елена Ивановна</p>
+            <p>Добро пожаловать в школьную библиотеку! У нас вы можете найти учебную и художественную литературу, справочные материалы и периодические издания. Библиотека работает для всех учащихся и сотрудников школы.</p>
+            
+            <img src="lib.jpg" alt="Фото библиотеки" style="max-width: 100%; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <p style="text-align: center; color: #64748b; margin-top: 10px;">📸 Наша библиотека</p>
+        </section>
+
+        <section class="stats-block">
+            <h3>Статистика библиотеки</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalBooks">0</span>
+                    <span class="stat-label">Всего книг</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="issuedBooks">0</span>
+                    <span class="stat-label">Выдано</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalReaders">0</span>
+                    <span class="stat-label">Читателей</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="announcement-block">
+            <h3>Объявление</h3>
+            <p>С 15 марта начинается приём заявок на новые учебники на следующий учебный год. Обращайтесь к библиотекарю в часы работы библиотеки.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Школьная библиотека МКОУ «Сивухская СОШ». Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
