@@ -338,4 +338,41 @@ input:focus, select:focus {
     .container {
         padding: 0 12px;
     }
+    button, .button {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+        box-sizing: border-box;
+    }
+
+    /* Контейнер для кнопок и поиска */
+    .search-box,
+    .admin-controls,
+    .admin-only {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    /* Поле поиска */
+    #searchInput {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* Группа кнопок (если есть рядом) */
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Таблицы с прокруткой, если не влезают */
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 500px;
+    }
 }
