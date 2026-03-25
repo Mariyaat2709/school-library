@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История выдач - Школьная библиотека</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
+            <nav class="main-nav">
+                <ul><li><a href="index.html">Главная</a></li><li><a href="https://sivukh-sosh.gosuslugi.ru/" target="_blank">Сайт школы</a></li><li><a href="books.html">Книги</a></li><li><a href="readers.html" class="admin-only">Читатели (для администратора)</a></li><li><a href="issue.html" class="admin-only">Выдача (для администратора)</a></li><li><a href="history.html" class="active">История выдач</a></li><li><a href="login.html" id="login-link">Вход</a></li><li><a href="rules.html">Правила</a></li><li><a href="contacts.html">Контакты</a></li></ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>История выдач</h2>
+        <p>Здесь отображаются все книги, которые сейчас на руках у читателей.</p>
+
+        <div style="margin-bottom: 20px;">
+            <input type="text" id="historySearchInput" placeholder="Поиск по читателю или книге..." style="width: 300px; padding: 8px; margin-right: 10px;">
+            <button id="historySearchBtn">Найти</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Читатель</th>
+                        <th>Книга</th>
+                        <th>Автор</th>
+                        <th>Дата выдачи</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTableBody">
+                    <tr><td colspan="4" class="text-muted">Загрузка...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Школьная библиотека МКОУ «Сивухская СОШ». Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -120,9 +120,9 @@ function renderBooksTable(filteredBooks = null) {
 
         let actionsHtml = '';
         if (isAdmin) {
-            actionsHtml = `<td><button class="action-btn" onclick="editBook(${book.id})">✎</button>`;
+            actionsHtml = `<td><button class="action-btn" onclick="editBook(${book.id})">✎</button></td>`;
         } else {
-            actionsHtml = '演';
+            actionsHtml = '<td></td>';
         }
 
         row.innerHTML = `
@@ -187,14 +187,14 @@ function setupAddBook() {
 }
 
 // ============================================
-// 5. ЧИТАТЕЛИ
+// 5. ЧИТАТЕЛИ (С ПОИСКОМ И ЗАЩИТОЙ ОТ ДУБЛИКАТОВ)
 // ============================================
 
-function renderReadersTable() {
+function renderReadersTable(filteredReaders = null) {
     const tableBody = document.getElementById('readersTableBody');
     if (!tableBody) return;
 
-    const readers = loadReaders();
+    const readers = filteredReaders || loadReaders();
     const readerCountSpan = document.getElementById('readerCount');
 
     tableBody.innerHTML = '';
@@ -249,15 +249,56 @@ function setupAddReader() {
         const className = prompt('Класс:');
         if (!className || className.trim() === '') return;
 
+        const trimmedName = name.trim();
+        const trimmedClass = className.trim();
+
         const readers = loadReaders();
-        readers.push({ name: name.trim(), class: className.trim() });
+
+        // Проверка на дубликат
+        const exists = readers.some(reader => 
+            reader.name === trimmedName && reader.class === trimmedClass
+        );
+
+        if (exists) {
+            alert('Такой читатель уже существует!');
+            return;
+        }
+
+        readers.push({ name: trimmedName, class: trimmedClass });
         saveReaders(readers);
         renderReadersTable();
     });
 }
 
+function setupReaderSearch() {
+    const searchBtn = document.getElementById('searchReaderBtn');
+    const searchInput = document.getElementById('searchReaderInput');
+    if (!searchBtn || !searchInput) return;
+
+    function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+        const allReaders = loadReaders();
+
+        if (query === '') {
+            renderReadersTable(allReaders);
+            return;
+        }
+
+        const filtered = allReaders.filter(reader =>
+            reader.name.toLowerCase().includes(query)
+        );
+
+        renderReadersTable(filtered);
+    }
+
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') performSearch();
+    });
+}
+
 // ============================================
-// 6. ПОИСК
+// 6. ПОИСК КНИГ
 // ============================================
 
 function setupSearch() {
@@ -291,7 +332,7 @@ function setupSearch() {
 }
 
 // ============================================
-// 7. ВЫДАЧА И ВОЗВРАТ
+// 7. ВЫДАЧА И ВОЗВРАТ (С СОХРАНЕНИЕМ ДАТЫ)
 // ============================================
 
 function setupIssueReturn() {
@@ -303,38 +344,42 @@ function setupIssueReturn() {
 
     if (!issueBtn && !returnBtn) return;
 
-    const books = loadBooks();
-    const readers = loadReaders();
+    function refreshSelects() {
+        const books = loadBooks();
+        const readers = loadReaders();
 
-    if (issueBookSelect) {
-        issueBookSelect.innerHTML = '<option value="">-- Выберите книгу --</option>';
-        books.filter(b => b.status === 'В наличии').forEach(book => {
-            const option = document.createElement('option');
-            option.value = book.id;
-            option.textContent = `${book.title} (${book.author})`;
-            issueBookSelect.appendChild(option);
-        });
+        if (issueBookSelect) {
+            issueBookSelect.innerHTML = '<option value="">-- Выберите книгу --</option>';
+            books.filter(b => b.status === 'В наличии').forEach(book => {
+                const option = document.createElement('option');
+                option.value = book.id;
+                option.textContent = `${book.title} (${book.author})`;
+                issueBookSelect.appendChild(option);
+            });
+        }
+
+        if (returnBookSelect) {
+            returnBookSelect.innerHTML = '<option value="">-- Выберите книгу --</option>';
+            books.filter(b => b.status === 'Выдана').forEach(book => {
+                const option = document.createElement('option');
+                option.value = book.id;
+                option.textContent = `${book.title} (${book.author})`;
+                returnBookSelect.appendChild(option);
+            });
+        }
+
+        if (readerSelect) {
+            readerSelect.innerHTML = '<option value="">-- Выберите читателя --</option>';
+            readers.forEach(reader => {
+                const option = document.createElement('option');
+                option.value = reader.name;
+                option.textContent = `${reader.name} (${reader.class})`;
+                readerSelect.appendChild(option);
+            });
+        }
     }
 
-    if (returnBookSelect) {
-        returnBookSelect.innerHTML = '<option value="">-- Выберите книгу --</option>';
-        books.filter(b => b.status === 'Выдана').forEach(book => {
-            const option = document.createElement('option');
-            option.value = book.id;
-            option.textContent = `${book.title} (${book.author})`;
-            returnBookSelect.appendChild(option);
-        });
-    }
-
-    if (readerSelect) {
-        readerSelect.innerHTML = '<option value="">-- Выберите читателя --</option>';
-        readers.forEach(reader => {
-            const option = document.createElement('option');
-            option.value = reader.name;
-            option.textContent = `${reader.name} (${reader.class})`;
-            readerSelect.appendChild(option);
-        });
-    }
+    refreshSelects();
 
     if (issueBtn) {
         issueBtn.addEventListener('click', () => {
@@ -350,9 +395,13 @@ function setupIssueReturn() {
             const book = books.find(b => b.id == bookId);
             if (book) {
                 book.status = 'Выдана';
+                book.issuedTo = readerName;
+                book.issueDate = new Date().toLocaleDateString();
                 saveBooks(books);
                 alert(`Книга "${book.title}" выдана читателю ${readerName}`);
-                location.reload();
+                refreshSelects();
+                renderBooksTable();
+                updateStats();
             }
         });
     }
@@ -370,16 +419,103 @@ function setupIssueReturn() {
             const book = books.find(b => b.id == bookId);
             if (book) {
                 book.status = 'В наличии';
+                delete book.issuedTo;
+                delete book.issueDate;
                 saveBooks(books);
                 alert(`Книга "${book.title}" возвращена`);
-                location.reload();
+                refreshSelects();
+                renderBooksTable();
+                updateStats();
             }
         });
     }
 }
 
 // ============================================
-// 8. ВХОД
+// 8. ИСТОРИЯ ВЫДАЧ
+// ============================================
+
+function renderHistoryTable(filteredIssues = null) {
+    const tableBody = document.getElementById('historyTableBody');
+    if (!tableBody) return;
+
+    const books = loadBooks();
+    const readers = loadReaders();
+
+    let issues = [];
+    books.forEach(book => {
+        if (book.status === 'Выдана' && book.issuedTo) {
+            issues.push({
+                readerName: book.issuedTo,
+                bookTitle: book.title,
+                bookAuthor: book.author,
+                issueDate: book.issueDate || 'Дата не указана'
+            });
+        }
+    });
+
+    const displayIssues = filteredIssues || issues;
+
+    if (displayIssues.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="4" class="text-muted">Нет выданных книг</td></tr>';
+        return;
+    }
+
+    tableBody.innerHTML = '';
+    displayIssues.forEach(issue => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${issue.readerName}</td>
+            <td>${issue.bookTitle}</td>
+            <td>${issue.bookAuthor}</td>
+            <td>${issue.issueDate}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function setupHistorySearch() {
+    const searchBtn = document.getElementById('historySearchBtn');
+    const searchInput = document.getElementById('historySearchInput');
+    if (!searchBtn || !searchInput) return;
+
+    function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        const books = loadBooks();
+        let issues = [];
+        books.forEach(book => {
+            if (book.status === 'Выдана' && book.issuedTo) {
+                issues.push({
+                    readerName: book.issuedTo,
+                    bookTitle: book.title,
+                    bookAuthor: book.author,
+                    issueDate: book.issueDate || 'Дата не указана'
+                });
+            }
+        });
+
+        if (query === '') {
+            renderHistoryTable(issues);
+            return;
+        }
+
+        const filtered = issues.filter(issue =>
+            issue.readerName.toLowerCase().includes(query) ||
+            issue.bookTitle.toLowerCase().includes(query)
+        );
+
+        renderHistoryTable(filtered);
+    }
+
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') performSearch();
+    });
+}
+
+// ============================================
+// 9. ВХОД
 // ============================================
 
 function setupLogin() {
@@ -400,7 +536,7 @@ function setupLogin() {
 }
 
 // ============================================
-// 9. ЗАПУСК
+// 10. ЗАПУСК
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -418,6 +554,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (path.includes('readers.html')) {
         renderReadersTable();
         setupAddReader();
+        setupReaderSearch();
     }
     if (path.includes('issue.html')) setupIssueReturn();
+    if (path.includes('history.html')) {
+        renderHistoryTable();
+        setupHistorySearch();
+    }
 });
