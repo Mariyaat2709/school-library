@@ -372,4 +372,16 @@ input:focus, select:focus {
     .contacts-employee div {
         text-align: center;
     }
+     .admin-controls,
+    .search-box,
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    /* Поля ввода и выпадающие списки */
+    input, select {
+        font-size: 16px !important; /* чтобы не масштабировалось на телефоне */
+    }
 }
