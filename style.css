@@ -39,11 +39,19 @@ body {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-/* ===== МЕНЮ (БЕЗ ПРОБЕЛОВ) ===== */
+/* ===== МЕНЮ С РАЗДЕЛЕНИЕМ ===== */
 .main-nav {
     margin-top: 15px;
     border-top: 1px solid rgba(255,255,255,0.2);
     padding-top: 15px;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 20px;
 }
 
 .nav-links {
@@ -53,7 +61,14 @@ body {
     align-items: center;
 }
 
-.nav-links a {
+.nav-auth {
+    display: flex;
+    gap: 0 20px;
+    align-items: center;
+}
+
+.nav-links a,
+.nav-auth a {
     text-decoration: none;
     color: #ffedd5;
     font-weight: 500;
@@ -65,7 +80,9 @@ body {
 }
 
 .nav-links a:hover,
-.nav-links a.active {
+.nav-links a.active,
+.nav-auth a:hover,
+.nav-auth a.active {
     color: #ffffff;
     border-bottom-color: #ffffff;
 }
@@ -268,12 +285,23 @@ input:focus, select:focus {
         text-align: center;
     }
     
-    .nav-links {
-        gap: 8px 12px;
-        justify-content: center;
+    .nav-wrapper {
+        flex-direction: column;
+        align-items: stretch;
     }
     
-    .nav-links a {
+    .nav-links {
+        justify-content: center;
+        gap: 8px 12px;
+    }
+    
+    .nav-auth {
+        justify-content: center;
+        margin-top: 5px;
+    }
+    
+    .nav-links a,
+    .nav-auth a {
         font-size: 0.85rem;
         white-space: normal;
         text-align: center;
