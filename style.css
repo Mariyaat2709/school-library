@@ -317,18 +317,48 @@ input:focus, select:focus {
         height: auto;
     }
     
+    /* Кнопки и поля на всю ширину */
     button, .button {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Поле поиска */
+    #searchInput {
         width: 100%;
         margin-bottom: 10px;
     }
     
-    .action-btn {
-        width: auto;
-        margin-bottom: 0;
+    /* Контейнер поиска (кнопка под полем) */
+    .search-box,
+    .search-block {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    /* Кнопка поиска отдельно */
+    #searchBtn {
+        width: 100%;
+    }
+    
+    /* Админ-кнопки и текст */
+    .admin-only button {
+        width: 100%;
+        display: block;
+    }
+    
+    .admin-only span {
+        display: block;
+        text-align: center;
+        margin-top: 5px;
     }
     
     table {
         font-size: 0.8rem;
+        min-width: 500px;
     }
     
     th, td {
@@ -337,42 +367,5 @@ input:focus, select:focus {
     
     .container {
         padding: 0 12px;
-    }
-    button, .button {
-        width: 100%;
-        margin-bottom: 10px;
-        margin-right: 0;
-        box-sizing: border-box;
-    }
-
-    /* Контейнер для кнопок и поиска */
-    .search-box,
-    .admin-controls,
-    .admin-only {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    /* Поле поиска */
-    #searchInput {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    /* Группа кнопок (если есть рядом) */
-    .button-group {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    /* Таблицы с прокруткой, если не влезают */
-    .table-wrapper {
-        overflow-x: auto;
-    }
-
-    table {
-        min-width: 500px;
     }
 }
