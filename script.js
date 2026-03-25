@@ -102,7 +102,7 @@ function updateStats() {
 }
 
 // ============================================
-// 4. КНИГИ
+// 4. КНИГИ (С ИСПРАВЛЕННОЙ КНОПКОЙ РЕДАКТИРОВАНИЯ)
 // ============================================
 
 function renderBooksTable(filteredBooks = null) {
@@ -154,6 +154,7 @@ function editBook(id) {
 
     saveBooks(books);
     renderBooksTable();
+    updateStats();
 }
 
 function setupAddBook() {
@@ -183,6 +184,7 @@ function setupAddBook() {
 
         saveBooks(books);
         renderBooksTable();
+        updateStats();
     });
 }
 
@@ -227,6 +229,7 @@ function editReader(index) {
 
     saveReaders(readers);
     renderReadersTable();
+    updateStats();
 }
 
 function deleteReader(index) {
@@ -235,6 +238,7 @@ function deleteReader(index) {
         readers.splice(index, 1);
         saveReaders(readers);
         renderReadersTable();
+        updateStats();
     }
 }
 
@@ -267,6 +271,7 @@ function setupAddReader() {
         readers.push({ name: trimmedName, class: trimmedClass });
         saveReaders(readers);
         renderReadersTable();
+        updateStats();
     });
 }
 
@@ -440,8 +445,6 @@ function renderHistoryTable(filteredIssues = null) {
     if (!tableBody) return;
 
     const books = loadBooks();
-    const readers = loadReaders();
-
     let issues = [];
     books.forEach(book => {
         if (book.status === 'Выдана' && book.issuedTo) {

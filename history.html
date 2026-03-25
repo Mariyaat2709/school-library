@@ -12,7 +12,7 @@
         <div class="container">
             <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
             <nav class="main-nav">
-                <ul><li><a href="index.html">Главная</a></li><li><a href="https://sivukh-sosh.gosuslugi.ru/" target="_blank">Сайт школы</a></li><li><a href="books.html">Книги</a></li><li><a href="readers.html" class="admin-only">Читатели (для администратора)</a></li><li><a href="issue.html" class="admin-only">Выдача (для администратора)</a></li><li><a href="history.html" class="active">История выдач</a></li><li><a href="login.html" id="login-link">Вход</a></li><li><a href="rules.html">Правила</a></li><li><a href="contacts.html">Контакты</a></li></ul>
+                <ul><li><a href="index.html">Главная</a></li><li><a href="https://sivukh-sosh.gosuslugi.ru/" target="_blank">Сайт школы</a></li><li><a href="books.html">Книги</a></li><li><a href="readers.html" class="admin-only">Читатели (для администратора)</a></li><li><a href="issue.html" class="admin-only">Выдача (для администратора)</a></li><li><a href="history.html" class="active admin-only">История выдач</a></li><li><a href="login.html" id="login-link">Вход</a></li><li><a href="rules.html">Правила</a></li><li><a href="contacts.html">Контакты</a></li></ul>
             </nav>
         </div>
     </header>
@@ -20,6 +20,10 @@
     <main class="container">
         <h2>История выдач</h2>
         <p>Здесь отображаются все книги, которые сейчас на руках у читателей.</p>
+
+        <div class="admin-warning">
+            ⚠️ <strong>Внимание:</strong> Эта страница доступна только для администратора
+        </div>
 
         <div style="margin-bottom: 20px;">
             <input type="text" id="historySearchInput" placeholder="Поиск по читателю или книге..." style="width: 300px; padding: 8px; margin-right: 10px;">
@@ -29,7 +33,7 @@
         <div class="table-wrapper">
             <table>
                 <thead>
-                    <tr>
+                    60;<tr>
                         <th>Читатель</th>
                         <th>Книга</th>
                         <th>Автор</th>
