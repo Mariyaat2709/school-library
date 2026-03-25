@@ -43,7 +43,7 @@ body {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px 30px;
+    gap: 0 20px;
     align-items: center;
     border-top: 1px solid rgba(255,255,255,0.2);
     padding-top: 15px;
