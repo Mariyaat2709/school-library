@@ -14,7 +14,17 @@
         <div class="container">
             <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
             <nav class="main-nav">
-                <ul><li><a href="index.html">Главная</a></li><li><a href="https://sivukh-sosh.gosuslugi.ru/" target="_blank">Сайт школы</a></li><li><a href="books.html">Книги</a></li><li><a href="readers.html" class="admin-only">Читатели (для администратора)</a></li><li><a href="issue.html" class="admin-only">Выдача (для администратора)</a></li><li><a href="history.html" class="admin-only">История выдач</a></li><li><a href="login.html" id="login-link">Вход</a></li><li><a href="rules.html">Правила</a></li><li><a href="contacts.html">Контакты</a></li></ul>            </nav>
+                <div class="nav-links">
+                    <a href="index.html">Главная</a>
+                    <a href="https://sivukh-sosh.gosuslugi.ru/" target="_blank">Сайт школы</a>
+                    <a href="books.html" class="active">Книги</a>
+                    <a href="readers.html" class="admin-only">Читатели</a>
+                    <a href="issue.html" class="admin-only">Выдача</a>
+                    <a href="history.html" class="admin-only">История</a>
+                    <a href="login.html" id="login-link">Вход</a>
+                    <a href="rules.html">Правила</a>
+                    <a href="contacts.html">Контакты</a>
+                </div>
             </nav>
         </div>
     </header>
@@ -32,18 +42,18 @@
 
         <div class="admin-only" style="margin-bottom: 20px;">
             <button id="addBookBtn">+ Добавить книгу</button>
+            <span class="text-muted">(только для администратора)</span>
         </div>
 
-         <table>
+        <table>
             <thead>
-                <tr>
+                60; late
                     <th>Название</th>
                     <th>Автор</th>
                     <th>Год</th>
                     <th>Статус</th>
                     <th>Действия</th>
-                </tr>
-            </thead>
+                </thead>
             <tbody id="booksTableBody">
                 <tr><td colspan="5" class="text-muted">Загрузка...</td></tr>
             </tbody>
