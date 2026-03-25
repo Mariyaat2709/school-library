@@ -8,6 +8,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Специальные стили для телефонов */
+        @media (max-width: 768px) {
+            .search-container {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+            .search-container input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .search-container button {
+                width: 100%;
+            }
+            .admin-only button {
+                width: 100%;
+                display: block;
+                margin-bottom: 5px;
+            }
+            .admin-only span {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -38,7 +65,7 @@
 
         <div style="margin-bottom: 25px;">
             <p><strong>Поиск:</strong> Название, автор или год</p>
-            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <div class="search-container" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                 <input type="text" id="searchInput" placeholder="Введите запрос..." style="flex: 1; min-width: 250px;">
                 <button id="searchBtn">Найти</button>
             </div>
@@ -46,17 +73,19 @@
 
         <div class="admin-only" style="margin-bottom: 20px;">
             <button id="addBookBtn" style="width: 100%; display: block; margin-bottom: 5px;">+ Добавить книгу</button>
-        <span class="text-muted" style="display: block; text-align: center;">(только для администратора)</span>
+            <span class="text-muted" style="display: block; text-align: center;">(только для администратора)</span>
         </div>
 
-        <table>
+         <table>
             <thead>
+                <tr>
                     <th>Название</th>
                     <th>Автор</th>
                     <th>Год</th>
                     <th>Статус</th>
                     <th>Действия</th>
-                </thead>
+                </tr>
+            </thead>
             <tbody id="booksTableBody">
                 <tr><td colspan="5" class="text-muted">Загрузка...</td></tr>
             </tbody>
