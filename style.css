@@ -284,88 +284,92 @@ input:focus, select:focus {
         font-size: 1.2rem;
         text-align: center;
     }
-    
+
     .nav-wrapper {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .nav-links {
         justify-content: center;
+        flex-wrap: wrap;
         gap: 8px 12px;
     }
-    
-    .nav-auth {
-        justify-content: center;
-        margin-top: 5px;
-    }
-    
-    .nav-links a,
-    .nav-auth a {
+
+    .nav-links a {
         font-size: 0.85rem;
         white-space: normal;
         text-align: center;
         padding: 4px 6px;
     }
-    
+
+    .nav-auth {
+        text-align: center;
+        margin-top: 5px;
+    }
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .info-block img {
         max-width: 100%;
         height: auto;
     }
-    
-    /* Кнопки и поля на всю ширину */
+
+    /* ===== КНОПКИ НА ВСЮ ШИРИНУ ===== */
     button, .button {
         width: 100%;
         margin-bottom: 10px;
         margin-right: 0;
         box-sizing: border-box;
     }
-    
-    /* Поле поиска */
-    #searchInput {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    
-    /* Контейнер поиска (кнопка под полем) */
+
     .search-box,
-    .search-block {
+    .admin-controls {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
-    
-    /* Кнопка поиска отдельно */
-    #searchBtn {
+
+    #searchInput,
+    #searchReaderInput,
+    #historySearchInput {
         width: 100%;
+        margin-bottom: 10px;
     }
-    
-    /* Админ-кнопки и текст */
-    .admin-only button {
-        width: 100%;
-        display: block;
+
+    .table-wrapper {
+        overflow-x: auto;
     }
-    
-    .admin-only span {
-        display: block;
-        text-align: center;
-        margin-top: 5px;
-    }
-    
+
     table {
-        font-size: 0.8rem;
         min-width: 500px;
     }
-    
-    th, td {
-        padding: 6px 8px;
+
+    /* ===== ФОРМЫ ВЫДАЧИ ===== */
+    .issue-form, .return-form {
+        width: 100%;
+        box-sizing: border-box;
     }
-    
-    .container {
-        padding: 0 12px;
+
+    select {
+        width: 100%;
+    }
+
+    /* ===== КОНТАКТЫ: ФОТО СОТРУДНИКОВ ===== */
+    .contacts-employee {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contacts-employee img {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 15px;
+    }
+
+    .contacts-employee div {
+        text-align: center;
     }
 }
