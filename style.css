@@ -264,67 +264,129 @@ input:focus, select:focus {
     font-size: 0.9rem;
 }
 
+/* ===== АДАПТАЦИЯ ДЛЯ ВСЕХ МОБИЛЬНЫХ БРАУЗЕРОВ ===== */
 @media (max-width: 768px) {
     .site-title {
         font-size: 1.2rem;
         text-align: center;
     }
+
     .nav-wrapper {
         flex-direction: column;
         align-items: stretch;
     }
+
     .nav-links {
         justify-content: center;
         flex-wrap: wrap;
         gap: 8px 12px;
     }
+
     .nav-links a {
         font-size: 0.85rem;
         white-space: normal;
         text-align: center;
         padding: 4px 6px;
     }
+
     .nav-auth {
         text-align: center;
         margin-top: 5px;
     }
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
+
     .info-block img {
         max-width: 100%;
         height: auto;
     }
-    button, .button {
-        width: 100% !important;
-        display: block !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        white-space: normal !important;
-        word-break: break-word !important;
-        padding: 10px 5px !important;
-        font-size: 0.9rem !important;
+
+    /* ===== УНИВЕРСАЛЬНЫЕ СТИЛИ ДЛЯ КНОПОК ===== */
+    button,
+    .button,
+    .btn,
+    #searchBtn,
+    #searchReaderBtn,
+    #historySearchBtn,
+    #addBookBtn,
+    #addReaderBtn,
+    #issueBtn,
+    #returnBtn,
+    #loginBtn {
+        width: 100%;
+        max-width: 100%;
+        min-width: auto;
+        display: block;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+        white-space: normal;
+        word-break: break-word;
+        padding: 10px 5px;
+        font-size: 0.9rem;
+        line-height: 1.3;
     }
+
+    /* Поля ввода */
     input[type="text"],
     input[type="password"],
     select {
-        width: 100% !important;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
+
+    /* Контейнеры с кнопками */
+    .search-block,
+    .admin-controls,
+    .admin-only,
+    .search-box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    /* Текст под кнопками */
+    .admin-only span,
+    .admin-controls span {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Таблицы */
     .table-wrapper {
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
+
     table {
         min-width: 500px;
     }
+
+    /* Формы выдачи */
+    .issue-form,
+    .return-form {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Сотрудники */
     .contacts-employee {
         flex-direction: column !important;
         text-align: center !important;
     }
+
     .contacts-employee img {
         width: 180px !important;
         height: 180px !important;
         margin: 0 auto 15px !important;
+        object-fit: cover !important;
     }
+
     .contacts-employee div {
         text-align: center !important;
     }
