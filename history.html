@@ -34,9 +34,11 @@
     <main class="container">
         <h2>История выдач</h2>
 
-        <div style="margin-bottom: 20px;">
-            <input type="text" id="historySearchInput" placeholder="Поиск по читателю или книге..." style="width: 300px; padding: 8px; margin-right: 10px;">
-            <button id="historySearchBtn">Найти</button>
+        <div style="margin-bottom: 20px; width: 100%;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="text" id="historySearchInput" placeholder="Поиск по читателю или книге..." style="flex: 1; min-width: 150px;">
+                <button id="historySearchBtn">Найти</button>
+            </div>
         </div>
 
         <div class="table-wrapper">

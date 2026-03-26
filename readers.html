@@ -36,13 +36,14 @@
     <main class="container">
         <h2>Читатели</h2>
 
-        <div style="margin-bottom: 20px;">
-            <input type="text" id="searchReaderInput" placeholder="Поиск по ФИО..." style="width: 300px; padding: 8px; margin-right: 10px;">
-            <button id="searchReaderBtn">Найти</button>
-        </div>
-
-        <div style="margin-bottom: 20px; width: 100%; max-width: 100%;">
-            <button id="addReaderBtn" style="width: 100%;">+ Добавить читателя</button>
+        <div style="margin-bottom: 20px; width: 100%;">
+            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="searchReaderInput" placeholder="Поиск по ФИО..." style="flex: 1; min-width: 150px;">
+                    <button id="searchReaderBtn">Найти</button>
+                </div>
+                <button id="addReaderBtn" style="width: 100%;">+ Добавить читателя</button>
+            </div>
         </div>
 
         <table>
