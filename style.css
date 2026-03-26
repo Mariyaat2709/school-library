@@ -317,71 +317,85 @@ input:focus, select:focus {
         height: auto;
     }
 
-    /* ===== КНОПКИ НА ВСЮ ШИРИНУ ===== */
-    button, .button {
-        width: 100%;
-        margin-bottom: 10px;
-        margin-right: 0;
-        box-sizing: border-box;
+    /* ===== ПРИНУДИТЕЛЬНАЯ АДАПТАЦИЯ КНОПОК ===== */
+    button,
+    .button,
+    .btn,
+    #searchBtn,
+    #searchReaderBtn,
+    #historySearchBtn,
+    #addBookBtn,
+    #addReaderBtn,
+    #issueBtn,
+    #returnBtn,
+    #loginBtn {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: auto !important;
+        display: block !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
     }
 
-    .search-box,
-    .admin-controls {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+    /* Все поля ввода на всю ширину */
+    input[type="text"],
+    input[type="password"],
+    select {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
-    #searchInput,
-    #searchReaderInput,
-    #historySearchInput {
-        width: 100%;
-        margin-bottom: 10px;
+    /* Контейнеры с кнопками и поиском */
+    .search-block,
+    .admin-controls,
+    .admin-only,
+    .search-box {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px !important;
     }
 
+    /* Текст под кнопками */
+    .admin-only span,
+    .admin-controls span {
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    /* Таблицы с горизонтальной прокруткой */
     .table-wrapper {
-        overflow-x: auto;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
     }
 
     table {
-        min-width: 500px;
+        min-width: 500px !important;
     }
 
-    /* ===== ФОРМЫ ВЫДАЧИ ===== */
+    /* Формы выдачи */
     .issue-form, .return-form {
-        width: 100%;
-        box-sizing: border-box;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
-    select {
-        width: 100%;
-    }
-
-    /* ===== КОНТАКТЫ: ФОТО СОТРУДНИКОВ ===== */
+    /* Сотрудники на странице контактов */
     .contacts-employee {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: column !important;
+        text-align: center !important;
     }
 
     .contacts-employee img {
-        width: 180px;
-        height: 180px;
-        margin: 0 auto 15px;
+        width: 180px !important;
+        height: 180px !important;
+        margin: 0 auto 15px !important;
+        object-fit: cover !important;
     }
 
     .contacts-employee div {
-        text-align: center;
-    }
-     .admin-controls,
-    .search-box,
-    .button-group {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    /* Поля ввода и выпадающие списки */
-    input, select {
-        font-size: 16px !important; /* чтобы не масштабировалось на телефоне */
+        text-align: center !important;
     }
 }
