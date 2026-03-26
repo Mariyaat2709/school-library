@@ -1,4 +1,3 @@
-/* ===== Общие настройки ===== */
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +20,6 @@ body {
     padding: 0 20px;
 }
 
-/* ===== ШАПКА (ОРАНЖЕВАЯ) ===== */
 .site-header {
     background: linear-gradient(135deg, #c95c0f 0%, #b04b0b 100%);
     border-bottom: 1px solid #9a3e0a;
@@ -39,7 +37,6 @@ body {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-/* ===== МЕНЮ С РАЗДЕЛЕНИЕМ ===== */
 .main-nav {
     margin-top: 15px;
     border-top: 1px solid rgba(255,255,255,0.2);
@@ -87,12 +84,10 @@ body {
     border-bottom-color: #ffffff;
 }
 
-/* ===== АДМИНСКИЕ ЭЛЕМЕНТЫ ===== */
 .admin-only {
     display: none;
 }
 
-/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
 main {
     flex: 1;
     padding-bottom: 40px;
@@ -115,7 +110,6 @@ h3 {
     margin-bottom: 15px;
 }
 
-/* ===== БЛОКИ ===== */
 .info-block, .stats-block {
     background-color: #ffffff;
     padding: 25px;
@@ -125,7 +119,6 @@ h3 {
     border: 1px solid #e2e8f0;
 }
 
-/* ===== СТАТИСТИКА ===== */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -153,7 +146,6 @@ h3 {
     color: #4a5568;
 }
 
-/* ===== ТАБЛИЦЫ ===== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -182,7 +174,6 @@ tr:last-child td {
     border-bottom: none;
 }
 
-/* ===== СТАТУСЫ КНИГ ===== */
 .status-available {
     color: #0f2b4b;
     font-weight: 500;
@@ -201,7 +192,6 @@ tr:last-child td {
     display: inline-block;
 }
 
-/* ===== КНОПКИ ===== */
 button, .button {
     background-color: #c95c0f;
     color: white;
@@ -229,14 +219,12 @@ button:hover, .button:hover {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
 }
 
 .action-btn:hover {
     background-color: #cbd5e1;
 }
 
-/* ===== ФОРМЫ ===== */
 input[type="text"],
 input[type="password"],
 select {
@@ -255,7 +243,6 @@ input:focus, select:focus {
     box-shadow: 0 0 0 2px rgba(201,92,15,0.1);
 }
 
-/* ===== ПОДВАЛ (ОРАНЖЕВЫЙ) ===== */
 .site-footer {
     background: linear-gradient(135deg, #c95c0f 0%, #b04b0b 100%);
     border-top: 1px solid #9a3e0a;
@@ -272,129 +259,72 @@ input:focus, select:focus {
     line-height: 1.5;
 }
 
-/* ===== ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ ===== */
 .text-muted {
     color: #64748b;
     font-size: 0.9rem;
 }
 
-/* ===== АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ ===== */
 @media (max-width: 768px) {
     .site-title {
         font-size: 1.2rem;
         text-align: center;
     }
-
     .nav-wrapper {
         flex-direction: column;
         align-items: stretch;
     }
-
     .nav-links {
         justify-content: center;
         flex-wrap: wrap;
         gap: 8px 12px;
     }
-
     .nav-links a {
         font-size: 0.85rem;
         white-space: normal;
         text-align: center;
         padding: 4px 6px;
     }
-
     .nav-auth {
         text-align: center;
         margin-top: 5px;
     }
-
     .stats-grid {
         grid-template-columns: 1fr;
     }
-
     .info-block img {
         max-width: 100%;
         height: auto;
     }
-
-    /* ===== ПРИНУДИТЕЛЬНАЯ АДАПТАЦИЯ КНОПОК ===== */
-    button,
-    .button,
-    .btn,
-    #searchBtn,
-    #searchReaderBtn,
-    #historySearchBtn,
-    #addBookBtn,
-    #addReaderBtn,
-    #issueBtn,
-    #returnBtn,
-    #loginBtn {
+    button, .button {
         width: 100% !important;
-        max-width: 100% !important;
-        min-width: auto !important;
         display: block !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        box-sizing: border-box !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        padding: 10px 5px !important;
+        font-size: 0.9rem !important;
     }
-
-    /* Все поля ввода на всю ширину */
     input[type="text"],
     input[type="password"],
     select {
         width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
     }
-
-    /* Контейнеры с кнопками и поиском */
-    .search-block,
-    .admin-controls,
-    .admin-only,
-    .search-box {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        gap: 10px !important;
-    }
-
-    /* Текст под кнопками */
-    .admin-only span,
-    .admin-controls span {
-        display: block !important;
-        text-align: center !important;
-        width: 100% !important;
-    }
-
-    /* Таблицы с горизонтальной прокруткой */
     .table-wrapper {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: auto;
     }
-
     table {
-        min-width: 500px !important;
+        min-width: 500px;
     }
-
-    /* Формы выдачи */
-    .issue-form, .return-form {
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-
-    /* Сотрудники на странице контактов */
     .contacts-employee {
         flex-direction: column !important;
         text-align: center !important;
     }
-
     .contacts-employee img {
         width: 180px !important;
         height: 180px !important;
         margin: 0 auto 15px !important;
-        object-fit: cover !important;
     }
-
     .contacts-employee div {
         text-align: center !important;
     }
