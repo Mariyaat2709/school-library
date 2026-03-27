@@ -103,7 +103,10 @@ function renderBooksTable(filteredBooks = null) {
             <td>${book.author}</td>
             <td>${book.year}</td>
             <td><span class="${book.status === 'В наличии' ? 'status-available' : 'status-issued'}">${book.status}</span></td>
-            <td>${isAdmin ? `<button class="action-btn" onclick="editBook(${book.id})">✎</button>` : ''}</td>
+            <td>${isAdmin ? `
+                <button class="action-btn" onclick="editBook(${book.id})">✎</button>
+                <button class="action-btn" onclick="deleteBook(${book.id})" style="background-color: #fee2e2; color: #b91c1c; margin-left: 5px;">🗑️</button>
+            ` : ''}</td>
         </tr>
     `).join('');
 
