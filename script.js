@@ -1,50 +1,44 @@
 // ============================================
-// 1. РАБОТА С ХРАНИЛИЩЕМ (localStorage)
+// 1. РАБОТА С ХРАНИЛИЩЕМ
 // ============================================
 
-function loadBooks() {
-    const books = localStorage.getItem('books');
-    if (books) {
-        return JSON.parse(books);
-    } else {
-        const initialBooks = [
-            { id: 1, title: 'Война и мир', author: 'Л. Толстой', year: 1869, status: 'В наличии' },
-            { id: 2, title: 'Преступление и наказание', author: 'Ф. Достоевский', year: 1866, status: 'В наличии' },
-            { id: 3, title: 'Мастер и Маргарита', author: 'М. Булгаков', year: 1967, status: 'В наличии' },
-            { id: 4, title: 'Евгений Онегин', author: 'А. Пушкин', year: 1833, status: 'В наличии' }
-        ];
-        localStorage.setItem('books', JSON.stringify(initialBooks));
-        return initialBooks;
-    }
+function loadFromStorage(key, initialData) {
+    const data = localStorage.getItem(key);
+    if (data) return JSON.parse(data);
+    localStorage.setItem(key, JSON.stringify(initialData));
+    return initialData;
 }
 
-function saveBooks(books) {
-    localStorage.setItem('books', JSON.stringify(books));
+function saveToStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+
+function loadBooks() {
+    const initialBooks = [
+        { id: 1, title: 'Война и мир', author: 'Л. Толстой', year: 1869, status: 'В наличии' },
+        { id: 2, title: 'Преступление и наказание', author: 'Ф. Достоевский', year: 1866, status: 'В наличии' },
+        { id: 3, title: 'Мастер и Маргарита', author: 'М. Булгаков', year: 1967, status: 'В наличии' },
+        { id: 4, title: 'Евгений Онегин', author: 'А. Пушкин', year: 1833, status: 'В наличии' }
+    ];
+    return loadFromStorage('books', initialBooks);
 }
 
 function loadReaders() {
-    const readers = localStorage.getItem('readers');
-    if (readers) {
-        return JSON.parse(readers);
-    } else {
-        const initialReaders = [
-            { name: 'Иванов Петр Сергеевич', class: '9А' },
-            { name: 'Смирнова Анна Дмитриевна', class: '10Б' },
-            { name: 'Кузнецов Дмитрий Александрович', class: '8В' },
-            { name: 'Петрова Мария Ивановна', class: '11А' },
-            { name: 'Соколов Алексей Петрович', class: '7Б' },
-            { name: 'Новикова Елена Сергеевна', class: '9Б' },
-            { name: 'Морозов Иван Викторович', class: '10А' },
-            { name: 'Васильева Ольга Николаевна', class: '8А' }
-        ];
-        localStorage.setItem('readers', JSON.stringify(initialReaders));
-        return initialReaders;
-    }
+    const initialReaders = [
+        { name: 'Иванов Петр Сергеевич', class: '9А' },
+        { name: 'Смирнова Анна Дмитриевна', class: '10Б' },
+        { name: 'Кузнецов Дмитрий Александрович', class: '8В' },
+        { name: 'Петрова Мария Ивановна', class: '11А' },
+        { name: 'Соколов Алексей Петрович', class: '7Б' },
+        { name: 'Новикова Елена Сергеевна', class: '9Б' },
+        { name: 'Морозов Иван Викторович', class: '10А' },
+        { name: 'Васильева Ольга Николаевна', class: '8А' }
+    ];
+    return loadFromStorage('readers', initialReaders);
 }
 
-function saveReaders(readers) {
-    localStorage.setItem('readers', JSON.stringify(readers));
-}
+function saveBooks(books) { saveToStorage('books', books); }
+function saveReaders(readers) { saveToStorage('readers', readers); }
 
 // ============================================
 // 2. АВТОРИЗАЦИЯ
@@ -56,21 +50,16 @@ function isAdminLoggedIn() {
 
 function updateAdminUI() {
     const loggedIn = isAdminLoggedIn();
-    const adminElements = document.querySelectorAll('.admin-only');
-    const loginLink = document.getElementById('login-link');
-
-    adminElements.forEach(el => {
+    document.querySelectorAll('.admin-only').forEach(el => {
         el.style.display = loggedIn ? 'inline-block' : 'none';
     });
 
+    const loginLink = document.getElementById('login-link');
     if (loginLink) {
         if (loggedIn) {
             loginLink.textContent = 'Выйти';
             loginLink.href = '#';
-            loginLink.onclick = function(e) {
-                e.preventDefault();
-                logout();
-            };
+            loginLink.onclick = (e) => { e.preventDefault(); logout(); };
         } else {
             loginLink.textContent = 'Вход';
             loginLink.href = 'login.html';
@@ -91,18 +80,14 @@ function logout() {
 function updateStats() {
     const books = loadBooks();
     const readers = loadReaders();
-    const totalBooksSpan = document.getElementById('totalBooks');
-    const issuedBooksSpan = document.getElementById('issuedBooks');
-    const totalReadersSpan = document.getElementById('totalReaders');
     const issuedCount = books.filter(b => b.status === 'Выдана').length;
-
-    if (totalBooksSpan) totalBooksSpan.textContent = books.length;
-    if (issuedBooksSpan) issuedBooksSpan.textContent = issuedCount;
-    if (totalReadersSpan) totalReadersSpan.textContent = readers.length;
+    document.getElementById('totalBooks') && (document.getElementById('totalBooks').textContent = books.length);
+    document.getElementById('issuedBooks') && (document.getElementById('issuedBooks').textContent = issuedCount);
+    document.getElementById('totalReaders') && (document.getElementById('totalReaders').textContent = readers.length);
 }
 
 // ============================================
-// 4. КНИГИ (С ИСПРАВЛЕННОЙ КНОПКОЙ РЕДАКТИРОВАНИЯ)
+// 4. КНИГИ
 // ============================================
 
 function renderBooksTable(filteredBooks = null) {
@@ -110,32 +95,19 @@ function renderBooksTable(filteredBooks = null) {
     if (!tableBody) return;
 
     const books = filteredBooks || loadBooks();
-    const bookCountSpan = document.getElementById('bookCount');
     const isAdmin = isAdminLoggedIn();
 
-    tableBody.innerHTML = '';
-    books.forEach(book => {
-        const row = document.createElement('tr');
-        const statusClass = book.status === 'В наличии' ? 'status-available' : 'status-issued';
-
-        let actionsHtml = '';
-        if (isAdmin) {
-            actionsHtml = `<td><button class="action-btn" onclick="editBook(${book.id})">✎</button></td>`;
-        } else {
-            actionsHtml = '<td></td>';
-        }
-
-        row.innerHTML = `
+    tableBody.innerHTML = books.map(book => `
+        <tr>
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.year}</td>
-            <td><span class="${statusClass}">${book.status}</span></td>
-            ${actionsHtml}
-        `;
-        tableBody.appendChild(row);
-    });
+            <td><span class="${book.status === 'В наличии' ? 'status-available' : 'status-issued'}">${book.status}</span></td>
+            <td>${isAdmin ? `<button class="action-btn" onclick="editBook(${book.id})">✎</button>` : ''}</td>
+        </tr>
+    `).join('');
 
-    if (bookCountSpan) bookCountSpan.textContent = books.length;
+    document.getElementById('bookCount') && (document.getElementById('bookCount').textContent = books.length);
 }
 
 function editBook(id) {
@@ -144,10 +116,10 @@ function editBook(id) {
     if (!book) return;
 
     const newTitle = prompt('Новое название:', book.title);
-    if (newTitle && newTitle.trim() !== '') book.title = newTitle.trim();
+    if (newTitle?.trim()) book.title = newTitle.trim();
 
     const newAuthor = prompt('Новый автор:', book.author);
-    if (newAuthor && newAuthor.trim() !== '') book.author = newAuthor.trim();
+    if (newAuthor?.trim()) book.author = newAuthor.trim();
 
     const newYear = prompt('Новый год:', book.year);
     if (newYear && !isNaN(parseInt(newYear))) book.year = parseInt(newYear);
@@ -163,25 +135,15 @@ function setupAddBook() {
 
     btn.addEventListener('click', () => {
         const title = prompt('Название книги:');
-        if (!title || title.trim() === '') return;
-
+        if (!title?.trim()) return;
         const author = prompt('Автор:');
-        if (!author || author.trim() === '') return;
-
+        if (!author?.trim()) return;
         const year = prompt('Год издания:');
         if (!year || isNaN(parseInt(year))) return;
 
         const books = loadBooks();
-        const newId = books.length > 0 ? Math.max(...books.map(b => b.id)) + 1 : 1;
-
-        books.push({
-            id: newId,
-            title: title.trim(),
-            author: author.trim(),
-            year: parseInt(year),
-            status: 'В наличии'
-        });
-
+        const newId = books.length ? Math.max(...books.map(b => b.id)) + 1 : 1;
+        books.push({ id: newId, title: title.trim(), author: author.trim(), year: parseInt(year), status: 'В наличии' });
         saveBooks(books);
         renderBooksTable();
         updateStats();
@@ -189,7 +151,7 @@ function setupAddBook() {
 }
 
 // ============================================
-// 5. ЧИТАТЕЛИ (С ПОИСКОМ И ЗАЩИТОЙ ОТ ДУБЛИКАТОВ)
+// 5. ЧИТАТЕЛИ
 // ============================================
 
 function renderReadersTable(filteredReaders = null) {
@@ -197,23 +159,18 @@ function renderReadersTable(filteredReaders = null) {
     if (!tableBody) return;
 
     const readers = filteredReaders || loadReaders();
-    const readerCountSpan = document.getElementById('readerCount');
-
-    tableBody.innerHTML = '';
-    readers.forEach((reader, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
+    tableBody.innerHTML = readers.map((reader, index) => `
+        <tr>
             <td>${reader.name}</td>
             <td>${reader.class}</td>
             <td>
                 <button class="action-btn" onclick="editReader(${index})">✎</button>
-                <button class="action-btn" onclick="deleteReader(${index})" style="background-color: #fee2e2; color: #b91c1c; margin-left: 5px;">🗑️</button>
+                <button class="action-btn" onclick="deleteReader(${index})" style="background-color:#fee2e2; color:#b91c1c;">🗑️</button>
             </td>
-        `;
-        tableBody.appendChild(row);
-    });
+        </tr>
+    `).join('');
 
-    if (readerCountSpan) readerCountSpan.textContent = readers.length;
+    document.getElementById('readerCount') && (document.getElementById('readerCount').textContent = readers.length);
 }
 
 function editReader(index) {
@@ -222,10 +179,10 @@ function editReader(index) {
     if (!reader) return;
 
     const newName = prompt('Изменить ФИО:', reader.name);
-    if (newName && newName.trim() !== '') reader.name = newName.trim();
+    if (newName?.trim()) reader.name = newName.trim();
 
     const newClass = prompt('Изменить класс:', reader.class);
-    if (newClass && newClass.trim() !== '') reader.class = newClass.trim();
+    if (newClass?.trim()) reader.class = newClass.trim();
 
     saveReaders(readers);
     renderReadersTable();
@@ -248,27 +205,17 @@ function setupAddReader() {
 
     btn.addEventListener('click', () => {
         const name = prompt('ФИО читателя:');
-        if (!name || name.trim() === '') return;
-
+        if (!name?.trim()) return;
         const className = prompt('Класс:');
-        if (!className || className.trim() === '') return;
-
-        const trimmedName = name.trim();
-        const trimmedClass = className.trim();
+        if (!className?.trim()) return;
 
         const readers = loadReaders();
-
-        // Проверка на дубликат
-        const exists = readers.some(reader => 
-            reader.name === trimmedName && reader.class === trimmedClass
-        );
-
-        if (exists) {
+        if (readers.some(r => r.name === name.trim() && r.class === className.trim())) {
             alert('Такой читатель уже существует!');
             return;
         }
 
-        readers.push({ name: trimmedName, class: trimmedClass });
+        readers.push({ name: name.trim(), class: className.trim() });
         saveReaders(readers);
         renderReadersTable();
         updateStats();
@@ -280,26 +227,14 @@ function setupReaderSearch() {
     const searchInput = document.getElementById('searchReaderInput');
     if (!searchBtn || !searchInput) return;
 
-    function performSearch() {
+    const search = () => {
         const query = searchInput.value.trim().toLowerCase();
-        const allReaders = loadReaders();
+        const readers = loadReaders();
+        renderReadersTable(query ? readers.filter(r => r.name.toLowerCase().includes(query)) : readers);
+    };
 
-        if (query === '') {
-            renderReadersTable(allReaders);
-            return;
-        }
-
-        const filtered = allReaders.filter(reader =>
-            reader.name.toLowerCase().includes(query)
-        );
-
-        renderReadersTable(filtered);
-    }
-
-    searchBtn.addEventListener('click', performSearch);
-    searchInput.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') performSearch();
-    });
+    searchBtn.addEventListener('click', search);
+    searchInput.addEventListener('keyup', e => { if (e.key === 'Enter') search(); });
 }
 
 // ============================================
@@ -309,35 +244,24 @@ function setupReaderSearch() {
 function setupSearch() {
     const searchBtn = document.getElementById('searchBtn');
     const searchInput = document.getElementById('searchInput');
-
     if (!searchBtn || !searchInput) return;
 
-    function performSearch() {
+    const search = () => {
         const query = searchInput.value.trim().toLowerCase();
-        const allBooks = loadBooks();
+        const books = loadBooks();
+        renderBooksTable(query ? books.filter(b => 
+            b.title.toLowerCase().includes(query) || 
+            b.author.toLowerCase().includes(query) || 
+            b.year.toString().includes(query)
+        ) : books);
+    };
 
-        if (query === '') {
-            renderBooksTable(allBooks);
-            return;
-        }
-
-        const filtered = allBooks.filter(book =>
-            book.title.toLowerCase().includes(query) ||
-            book.author.toLowerCase().includes(query) ||
-            book.year.toString().includes(query)
-        );
-
-        renderBooksTable(filtered);
-    }
-
-    searchBtn.addEventListener('click', performSearch);
-    searchInput.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') performSearch();
-    });
+    searchBtn.addEventListener('click', search);
+    searchInput.addEventListener('keyup', e => { if (e.key === 'Enter') search(); });
 }
 
 // ============================================
-// 7. ВЫДАЧА И ВОЗВРАТ (С СОХРАНЕНИЕМ ДАТЫ)
+// 7. ВЫДАЧА И ВОЗВРАТ
 // ============================================
 
 function setupIssueReturn() {
@@ -346,94 +270,66 @@ function setupIssueReturn() {
     const issueBookSelect = document.getElementById('issueBookSelect');
     const returnBookSelect = document.getElementById('returnBookSelect');
     const readerSelect = document.getElementById('issueReaderSelect');
-
     if (!issueBtn && !returnBtn) return;
 
-    function refreshSelects() {
+    const refreshSelects = () => {
         const books = loadBooks();
         const readers = loadReaders();
 
         if (issueBookSelect) {
-            issueBookSelect.innerHTML = '<option value="">-- Выберите книгу --</option>';
-            books.filter(b => b.status === 'В наличии').forEach(book => {
-                const option = document.createElement('option');
-                option.value = book.id;
-                option.textContent = `${book.title} (${book.author})`;
-                issueBookSelect.appendChild(option);
-            });
+            issueBookSelect.innerHTML = '<option value="">-- Выберите книгу --</option>' + 
+                books.filter(b => b.status === 'В наличии').map(b => `<option value="${b.id}">${b.title} (${b.author})</option>`).join('');
         }
 
         if (returnBookSelect) {
-            returnBookSelect.innerHTML = '<option value="">-- Выберите книгу --</option>';
-            books.filter(b => b.status === 'Выдана').forEach(book => {
-                const option = document.createElement('option');
-                option.value = book.id;
-                option.textContent = `${book.title} (${book.author})`;
-                returnBookSelect.appendChild(option);
-            });
+            returnBookSelect.innerHTML = '<option value="">-- Выберите книгу --</option>' + 
+                books.filter(b => b.status === 'Выдана').map(b => `<option value="${b.id}">${b.title} (${b.author})</option>`).join('');
         }
 
         if (readerSelect) {
-            readerSelect.innerHTML = '<option value="">-- Выберите читателя --</option>';
-            readers.forEach(reader => {
-                const option = document.createElement('option');
-                option.value = reader.name;
-                option.textContent = `${reader.name} (${reader.class})`;
-                readerSelect.appendChild(option);
-            });
+            readerSelect.innerHTML = '<option value="">-- Выберите читателя --</option>' + 
+                readers.map(r => `<option value="${r.name}">${r.name} (${r.class})</option>`).join('');
         }
-    }
+    };
 
     refreshSelects();
 
-    if (issueBtn) {
-        issueBtn.addEventListener('click', () => {
-            const bookId = issueBookSelect.value;
-            const readerName = readerSelect.value;
+    issueBtn?.addEventListener('click', () => {
+        const bookId = issueBookSelect.value;
+        const readerName = readerSelect.value;
+        if (!bookId || !readerName) return alert('Выберите книгу и читателя');
 
-            if (!bookId || !readerName) {
-                alert('Выберите книгу и читателя');
-                return;
-            }
+        const books = loadBooks();
+        const book = books.find(b => b.id == bookId);
+        if (book) {
+            book.status = 'Выдана';
+            book.issuedTo = readerName;
+            book.issueDate = new Date().toLocaleDateString();
+            saveBooks(books);
+            alert(`Книга "${book.title}" выдана читателю ${readerName}`);
+            refreshSelects();
+            renderBooksTable();
+            updateStats();
+        }
+    });
 
-            const books = loadBooks();
-            const book = books.find(b => b.id == bookId);
-            if (book) {
-                book.status = 'Выдана';
-                book.issuedTo = readerName;
-                book.issueDate = new Date().toLocaleDateString();
-                saveBooks(books);
-                alert(`Книга "${book.title}" выдана читателю ${readerName}`);
-                refreshSelects();
-                renderBooksTable();
-                updateStats();
-            }
-        });
-    }
+    returnBtn?.addEventListener('click', () => {
+        const bookId = returnBookSelect.value;
+        if (!bookId) return alert('Выберите книгу');
 
-    if (returnBtn) {
-        returnBtn.addEventListener('click', () => {
-            const bookId = returnBookSelect.value;
-
-            if (!bookId) {
-                alert('Выберите книгу');
-                return;
-            }
-
-            const books = loadBooks();
-            const book = books.find(b => b.id == bookId);
-            if (book) {
-                book.status = 'В наличии';
-                delete book.issuedTo;
-                delete book.issueDate;
-                saveBooks(books);
-                alert(`Книга "${book.title}" возвращена`);
-                refreshSelects();
-                renderBooksTable();
-                updateStats();
-            }
-        });
-    }
+        const books = loadBooks();
+        const book = books.find(b => b.id == bookId);
+        if (book) {
+            book.status = 'В наличии';
+            delete book.issuedTo;
+            delete book.issueDate;
+            saveBooks(books);
+            alert(`Книга "${book.title}" возвращена`);
+            refreshSelects();
+            renderBooksTable();
+            updateStats();
+        }
+    });
 }
 
 // ============================================
@@ -444,18 +340,12 @@ function renderHistoryTable(filteredIssues = null) {
     const tableBody = document.getElementById('historyTableBody');
     if (!tableBody) return;
 
-    const books = loadBooks();
-    let issues = [];
-    books.forEach(book => {
-        if (book.status === 'Выдана' && book.issuedTo) {
-            issues.push({
-                readerName: book.issuedTo,
-                bookTitle: book.title,
-                bookAuthor: book.author,
-                issueDate: book.issueDate || 'Дата не указана'
-            });
-        }
-    });
+    const issues = loadBooks().filter(b => b.status === 'Выдана' && b.issuedTo).map(b => ({
+        readerName: b.issuedTo,
+        bookTitle: b.title,
+        bookAuthor: b.author,
+        issueDate: b.issueDate || 'Дата не указана'
+    }));
 
     const displayIssues = filteredIssues || issues;
 
@@ -464,17 +354,14 @@ function renderHistoryTable(filteredIssues = null) {
         return;
     }
 
-    tableBody.innerHTML = '';
-    displayIssues.forEach(issue => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
+    tableBody.innerHTML = displayIssues.map(issue => `
+        <tr>
             <td>${issue.readerName}</td>
             <td>${issue.bookTitle}</td>
             <td>${issue.bookAuthor}</td>
             <td>${issue.issueDate}</td>
-        `;
-        tableBody.appendChild(row);
-    });
+        </tr>
+    `).join('');
 }
 
 function setupHistorySearch() {
@@ -482,39 +369,19 @@ function setupHistorySearch() {
     const searchInput = document.getElementById('historySearchInput');
     if (!searchBtn || !searchInput) return;
 
-    function performSearch() {
+    const search = () => {
         const query = searchInput.value.trim().toLowerCase();
+        const issues = loadBooks().filter(b => b.status === 'Выдана' && b.issuedTo).map(b => ({
+            readerName: b.issuedTo,
+            bookTitle: b.title,
+            bookAuthor: b.author,
+            issueDate: b.issueDate || 'Дата не указана'
+        }));
+        renderHistoryTable(query ? issues.filter(i => i.readerName.toLowerCase().includes(query) || i.bookTitle.toLowerCase().includes(query)) : issues);
+    };
 
-        const books = loadBooks();
-        let issues = [];
-        books.forEach(book => {
-            if (book.status === 'Выдана' && book.issuedTo) {
-                issues.push({
-                    readerName: book.issuedTo,
-                    bookTitle: book.title,
-                    bookAuthor: book.author,
-                    issueDate: book.issueDate || 'Дата не указана'
-                });
-            }
-        });
-
-        if (query === '') {
-            renderHistoryTable(issues);
-            return;
-        }
-
-        const filtered = issues.filter(issue =>
-            issue.readerName.toLowerCase().includes(query) ||
-            issue.bookTitle.toLowerCase().includes(query)
-        );
-
-        renderHistoryTable(filtered);
-    }
-
-    searchBtn.addEventListener('click', performSearch);
-    searchInput.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') performSearch();
-    });
+    searchBtn.addEventListener('click', search);
+    searchInput.addEventListener('keyup', e => { if (e.key === 'Enter') search(); });
 }
 
 // ============================================
@@ -528,7 +395,6 @@ function setupLogin() {
     loginBtn.addEventListener('click', () => {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-
         if (username === 'admin' && password === 'admin123') {
             localStorage.setItem('isAdmin', 'true');
             window.location.href = 'index.html';
@@ -542,7 +408,7 @@ function setupLogin() {
 // 10. ЗАПУСК
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     updateAdminUI();
 
     const path = window.location.pathname;

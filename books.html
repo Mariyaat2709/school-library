@@ -36,17 +36,14 @@
     <main class="container">
         <h2>Книги</h2>
 
-        <div style="margin-bottom: 25px;">
-            <p><strong>Поиск:</strong> Название, автор или год</p>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Введите запрос...">
-                <button id="searchBtn">Найти</button>
-            </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Поиск: Название, автор или год">
+            <button id="searchBtn">Найти</button>
         </div>
 
-        <div class="admin-only" style="margin-bottom: 20px;">
+        <div class="admin-only">
             <button id="addBookBtn">+ Добавить книгу</button>
-            <span class="text-muted" style="display: block; text-align: center; margin-top: 5px;">(только для администратора)</span>
+            <p class="text-muted">(только для администратора)</p>
         </div>
 
         <div class="table-wrapper">

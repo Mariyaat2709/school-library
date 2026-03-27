@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Контакты - Школьная библиотека</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div style="display: none;">forced update</div>
     <header class="site-header">
         <div class="container">
             <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
@@ -37,50 +36,48 @@
     <main class="container">
         <h2>Контактная информация</h2>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
-            <div style="background: white; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                <h3 style="margin-top: 0;">Контакты</h3>
+        <div class="flex-grid">
+            <div class="card">
+                <h3>Контакты</h3>
                 <p><strong>Адрес:</strong><br>Хасавюртовский район, с. Сивух, ул.Северная зд.10</p>
-                <p><strong>Телефон :</strong><br>8 (919) 703-03-04</p>
+                <p><strong>Телефон:</strong><br>8 (919) 703-03-04</p>
                 <p><strong>Email:</strong><br>sivukh-sosh@mail.ru</p>
             </div>
 
-            <div style="background: white; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                <h3 style="margin-top: 0;">Часы работы</h3>
+            <div class="card">
+                <h3>Часы работы</h3>
                 <p><strong>Понедельник - Пятница:</strong> 8:00 - 17:00</p>
                 <p><strong>Суббота, Воскресенье:</strong> Выходной</p>
-                <p class="text-muted" style="margin-top: 10px;">Перерыв на обед: 12:00 - 13:00</p>
+                <p class="text-muted">Перерыв на обед: 12:00 - 13:00</p>
             </div>
         </div>
 
-        <div style="background: white; padding: 25px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 30px;">
-            <h3 style="margin-top: 0;">Сотрудники библиотеки</h3>
-            
-            <div style="display: flex; flex-direction: column; gap: 40px;">
-                <div class="contacts-employee" style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
-                    <img src="librarian1.jpg" alt="Магомедова Эбират Гаджиевна" style="width: 180px; height: 180px; object-fit: cover; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <div>
-                        <p><strong>Магомедова Эбсират Гаджиевна</strong><br>
-                        Заведующая библиотекой<br>
-                        Стаж работы: 45 лет<br>
-                        Образование: высшее педагогическое</p>
-                    </div>
+        <div class="card">
+            <h3>Сотрудники библиотеки</h3>
+
+            <div class="employee-card">
+                <img src="librarian1.jpg" alt="Магомедова Эбират Гаджиевна">
+                <div>
+                    <p><strong>Магомедова Эбсират Гаджиевна</strong><br>
+                    Заведующая библиотекой<br>
+                    Стаж работы: 45 лет<br>
+                    Образование: высшее педагогическое</p>
                 </div>
-                
-                <div class="contacts-employee" style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
-                    <img src="librarian2.jpg" alt="Хамирзаева Саида Зубайриевна" style="width: 180px; height: 180px; object-fit: cover; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <div>
-                        <p><strong>Хамирзаева Саидат Зубайриевна</strong><br>
-                        Библиотекарь<br>
-                        Стаж работы: 3 года<br>
-                        Образование: высшее педагогическое</p>
-                    </div>
+            </div>
+
+            <div class="employee-card">
+                <img src="librarian2.jpg" alt="Хамирзаева Саида Зубайриевна">
+                <div>
+                    <p><strong>Хамирзаева Саидат Зубайриевна</strong><br>
+                    Библиотекарь<br>
+                    Стаж работы: 3 года<br>
+                    Образование: высшее педагогическое</p>
                 </div>
             </div>
         </div>
 
-        <div style="background: #e2e8f0; padding: 25px; border-radius: 8px;">
-            <h3 style="margin-top: 0;">Как нас найти</h3>
+        <div class="card" style="background-color: #e2e8f0;">
+            <h3>Как нас найти</h3>
             <p>Библиотека находится на первом этаже школы, рядом с кабинетом завуча. Вход со стороны главного входа, повернуть налево после вахты и еще раз свернуть налево.</p>
         </div>
     </main>

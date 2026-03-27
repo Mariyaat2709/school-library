@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Вход - Школьная библиотека</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div style="display: none;">forced update</div>
     <header class="site-header">
         <div class="container">
             <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
@@ -37,18 +36,16 @@
     <main class="container">
         <h2>Вход для администратора</h2>
 
-        <div style="max-width: 400px; margin: 0 auto;">
-            <div>
-                <label><strong>Логин:</strong></label>
-                <input type="text" id="username" placeholder="Введите логин" value="admin">
-            </div>
-            <div>
-                <label><strong>Пароль:</strong></label>
-                <input type="password" id="password" placeholder="Введите пароль" value="admin123">
-            </div>
-            <button id="loginBtn" style="width: 100%;">Войти</button>
+        <div class="login-box">
+            <label><strong>Логин:</strong></label>
+            <input type="text" id="username" placeholder="Введите логин" value="admin">
+            
+            <label><strong>Пароль:</strong></label>
+            <input type="password" id="password" placeholder="Введите пароль" value="admin123">
+            
+            <button id="loginBtn">Войти</button>
 
-            <p class="text-muted" style="margin-top: 20px; text-align: center;">Доступ к администраторским функциям имеет только библиотекарь.</p>
+            <p class="text-muted">Доступ к администраторским функциям имеет только библиотекарь.</p>
         </div>
     </main>
 

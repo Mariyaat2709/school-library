@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Выдача книг - Школьная библиотека</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div style="display: none;">forced update</div>
     <header class="site-header">
         <div class="container">
             <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
@@ -37,27 +36,24 @@
     <main class="container">
         <h2>Выдача и возврат книг</h2>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-            <div style="background-color: #f1f5f9; padding: 25px; border-radius: 8px;">
-                <h3 style="margin-top: 0;">Выдать книгу</h3>
-                <div>
-                    <label><strong>Выберите книгу:</strong></label>
-                    <select id="issueBookSelect"></select>
-                </div>
-                <div>
-                    <label><strong>Выберите читателя:</strong></label>
-                    <select id="issueReaderSelect"></select>
-                </div>
-                <button id="issueBtn" style="width: 100%;">Выдать</button>
+        <div class="flex-grid">
+            <div class="issue-return-block">
+                <h3>Выдать книгу</h3>
+                <label><strong>Выберите книгу:</strong></label>
+                <select id="issueBookSelect"></select>
+                
+                <label><strong>Выберите читателя:</strong></label>
+                <select id="issueReaderSelect"></select>
+                
+                <button id="issueBtn">Выдать</button>
             </div>
 
-            <div style="background-color: #f1f5f9; padding: 25px; border-radius: 8px;">
-                <h3 style="margin-top: 0;">Вернуть книгу</h3>
-                <div>
-                    <label><strong>Выберите книгу:</strong></label>
-                    <select id="returnBookSelect"></select>
-                </div>
-                <button id="returnBtn" style="width: 100%;">Вернуть</button>
+            <div class="issue-return-block">
+                <h3>Вернуть книгу</h3>
+                <label><strong>Выберите книгу:</strong></label>
+                <select id="returnBookSelect"></select>
+                
+                <button id="returnBtn">Вернуть</button>
             </div>
         </div>
     </main>

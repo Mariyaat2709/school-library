@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>История выдач - Школьная библиотека</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div style="display: none;">forced update</div>
     <header class="site-header">
         <div class="container">
             <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
@@ -37,11 +36,9 @@
     <main class="container">
         <h2>История выдач</h2>
 
-        <div style="margin-bottom: 20px; width: 100%;">
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <input type="text" id="historySearchInput" placeholder="Поиск по читателю или книге..." style="flex: 1; min-width: 150px;">
-                <button id="historySearchBtn">Найти</button>
-            </div>
+        <div class="search-container">
+            <input type="text" id="historySearchInput" placeholder="Поиск по читателю или книге...">
+            <button id="historySearchBtn">Найти</button>
         </div>
 
         <div class="table-wrapper">

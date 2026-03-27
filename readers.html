@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Читатели - Школьная библиотека</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div style="display: none;">forced update</div>
     <header class="site-header">
         <div class="container">
             <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
@@ -37,14 +36,13 @@
     <main class="container">
         <h2>Читатели</h2>
 
-        <div style="margin-bottom: 20px; width: 100%;">
-            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <input type="text" id="searchReaderInput" placeholder="Поиск по ФИО..." style="flex: 1; min-width: 150px;">
-                    <button id="searchReaderBtn">Найти</button>
-                </div>
-                <button id="addReaderBtn" style="width: 100%;">+ Добавить читателя</button>
-            </div>
+        <div class="search-container">
+            <input type="text" id="searchReaderInput" placeholder="Поиск по ФИО...">
+            <button id="searchReaderBtn">Найти</button>
+        </div>
+
+        <div class="admin-only">
+            <button id="addReaderBtn">+ Добавить читателя</button>
         </div>
 
         <div class="table-wrapper">
