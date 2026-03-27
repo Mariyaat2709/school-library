@@ -131,6 +131,7 @@ function editBook(id) {
     renderBooksTable();
     updateStats();
 }
+
 function deleteBook(id) {
     if (confirm('Вы уверены, что хотите удалить книгу?')) {
         const books = loadBooks();
@@ -418,7 +419,88 @@ function setupLogin() {
 }
 
 // ============================================
-// 10. ЗАПУСК
+// 10. ЭКСПОРТ/ИМПОРТ ДАННЫХ (внизу страницы)
+// ============================================
+
+function exportData() {
+    const data = {
+        books: loadBooks(),
+        readers: loadReaders(),
+        exportDate: new Date().toLocaleString()
+    };
+    const dataStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([dataStr], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `library_backup_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    alert('✅ Данные экспортированы! Файл сохранен на компьютер.');
+}
+
+function importData(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            let importCount = 0;
+            
+            if (data.books) {
+                saveBooks(data.books);
+                importCount += data.books.length;
+                alert(`📚 Импортировано книг: ${data.books.length}`);
+            }
+            if (data.readers) {
+                saveReaders(data.readers);
+                alert(`👥 Импортировано читателей: ${data.readers.length}`);
+            }
+            
+            alert(`✅ Данные успешно импортированы! Всего записей: ${importCount}\nСтраница будет обновлена.`);
+            location.reload();
+        } catch (err) {
+            alert('❌ Ошибка при импорте: ' + err.message);
+        }
+    };
+    reader.readAsText(file);
+}
+
+function addBackupSection() {
+    const mainContainer = document.querySelector('main.container');
+    if (!mainContainer || document.getElementById('backupSection')) return;
+    
+    const backupSection = document.createElement('div');
+    backupSection.id = 'backupSection';
+    backupSection.className = 'backup-section';
+    backupSection.innerHTML = `
+        <div class="backup-title">
+            💾 Резервное копирование данных
+        </div>
+        <div class="backup-buttons">
+            <button id="exportDataBtn">📤 Экспорт (скачать backup)</button>
+            <button id="importDataBtn">📥 Импорт (восстановить из файла)</button>
+        </div>
+        <p class="text-muted" style="margin-top: 10px; font-size: 0.8rem;">
+            🔒 Данные хранятся только в вашем браузере. Рекомендуется периодически делать резервные копии.
+        </p>
+    `;
+    
+    mainContainer.appendChild(backupSection);
+    
+    document.getElementById('exportDataBtn').addEventListener('click', exportData);
+    document.getElementById('importDataBtn').addEventListener('click', () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/json';
+        input.onchange = (e) => {
+            if (e.target.files[0]) importData(e.target.files[0]);
+        };
+        input.click();
+    });
+}
+
+// ============================================
+// 11. ЗАПУСК
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -432,15 +514,18 @@ document.addEventListener('DOMContentLoaded', () => {
         renderBooksTable();
         setupSearch();
         setupAddBook();
+        addBackupSection();
     }
     if (path.includes('readers.html')) {
         renderReadersTable();
         setupAddReader();
         setupReaderSearch();
+        addBackupSection();
     }
     if (path.includes('issue.html')) setupIssueReturn();
     if (path.includes('history.html')) {
         renderHistoryTable();
         setupHistorySearch();
+        addBackupSection();
     }
 });

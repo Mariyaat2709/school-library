@@ -274,6 +274,39 @@ button:hover, .button:hover {
     margin-top: 5px;
 }
 
+/* ===== КНОПКИ БЭКАПА ===== */
+.backup-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #e2e8f0;
+}
+
+.backup-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.backup-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.backup-buttons button {
+    background: #4a5568;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.backup-buttons button:hover {
+    background: #2d3748;
+}
+
 /* ===== ФОРМЫ ===== */
 input, select {
     width: 100%;
@@ -483,5 +516,13 @@ input:focus, select:focus {
         max-width: 300px;
         margin: 0 auto;
         padding: 20px;
+    }
+    
+    .backup-buttons {
+        flex-direction: column;
+    }
+    
+    .backup-buttons button {
+        width: 100%;
     }
 }
