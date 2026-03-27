@@ -131,6 +131,16 @@ function editBook(id) {
     renderBooksTable();
     updateStats();
 }
+function deleteBook(id) {
+    if (confirm('Вы уверены, что хотите удалить книгу?')) {
+        const books = loadBooks();
+        const filteredBooks = books.filter(book => book.id !== id);
+        saveBooks(filteredBooks);
+        renderBooksTable();
+        updateStats();
+        alert('Книга удалена');
+    }
+}
 
 function setupAddBook() {
     const btn = document.getElementById('addBookBtn');
