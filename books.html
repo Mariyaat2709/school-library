@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Книги - Школьная библиотека</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div style="display: none;">forced update</div>
     <header class="site-header">
         <div class="container">
             <h1 class="site-title">Школьная библиотека МКОУ «Сивухская СОШ»</h1>
@@ -39,15 +38,15 @@
 
         <div style="margin-bottom: 25px;">
             <p><strong>Поиск:</strong> Название, автор или год</p>
-            <div class="search-container" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                <input type="text" id="searchInput" placeholder="Введите запрос..." style="flex: 1; min-width: 150px;">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Введите запрос...">
                 <button id="searchBtn">Найти</button>
             </div>
         </div>
 
-        <div class="admin-only" style="margin-bottom: 20px; width: 100%;">
-            <button id="addBookBtn" style="width: 100%;">+ Добавить книгу</button>
-            <span class="text-muted" style="display: block; text-align: center;">(только для администратора)</span>
+        <div class="admin-only" style="margin-bottom: 20px;">
+            <button id="addBookBtn">+ Добавить книгу</button>
+            <span class="text-muted" style="display: block; text-align: center; margin-top: 5px;">(только для администратора)</span>
         </div>
 
         <div class="table-wrapper">
