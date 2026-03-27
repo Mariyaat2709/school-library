@@ -46,7 +46,6 @@ body {
 
 .nav-wrapper {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 15px 20px;
@@ -54,15 +53,31 @@ body {
 
 .nav-links {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0 20px;
     align-items: center;
+    overflow-x: auto;
     flex: 1;
+    scrollbar-width: thin;
+}
+
+.nav-links::-webkit-scrollbar {
+    height: 4px;
+}
+
+.nav-links::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+
+.nav-links::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.5);
+    border-radius: 4px;
 }
 
 .nav-auth {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0 20px;
     align-items: center;
     flex-shrink: 0;
@@ -81,6 +96,7 @@ body {
     line-height: 1;
     display: inline-flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .nav-links a:hover,
@@ -430,10 +446,10 @@ input:focus, select:focus {
     }
 
     .nav-links {
-        justify-content: center;
         flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
         gap: 8px 12px;
-        flex: none;
     }
 
     .nav-links a {
@@ -444,7 +460,6 @@ input:focus, select:focus {
     }
 
     .nav-auth {
-        text-align: center;
         justify-content: center;
         margin-top: 0;
     }
@@ -524,5 +539,16 @@ input:focus, select:focus {
     
     .backup-buttons button {
         width: 100%;
+    }
+}
+
+/* ===== ДЛЯ ОЧЕНЬ ШИРОКИХ ЭКРАНОВ ===== */
+@media (min-width: 1400px) {
+    .nav-links {
+        gap: 0 30px;
+    }
+    
+    .nav-links a {
+        font-size: 1rem;
     }
 }
