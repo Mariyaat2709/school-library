@@ -37,7 +37,7 @@ body {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-/* ===== МЕНЮ ===== */
+/* ===== МЕНЮ (ВСЕ ВКЛАДКИ В ОДНУ СТРОКУ) ===== */
 .main-nav {
     margin-top: 15px;
     border-top: 1px solid rgba(255,255,255,0.2);
@@ -46,10 +46,10 @@ body {
 
 .nav-wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
-    gap: 10px 20px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px 20px;
 }
 
 .nav-links {
@@ -57,12 +57,15 @@ body {
     flex-wrap: wrap;
     gap: 0 20px;
     align-items: center;
+    flex: 1;
 }
 
 .nav-auth {
     display: flex;
+    flex-wrap: wrap;
     gap: 0 20px;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .nav-links a,
@@ -75,6 +78,9 @@ body {
     transition: color 0.2s;
     border-bottom: 2px solid transparent;
     white-space: nowrap;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
 }
 
 .nav-links a:hover,
@@ -202,7 +208,7 @@ tr:last-child td {
     display: inline-block;
 }
 
-/* ===== КНОПКИ (ОСНОВНЫЕ) ===== */
+/* ===== КНОПКИ ===== */
 button, .button {
     background: #c95c0f;
     color: #fff;
@@ -231,7 +237,7 @@ button:hover, .button:hover {
     background: #cbd5e1;
 }
 
-/* ===== ПОИСК (ОСНОВНЫЕ СТИЛИ) ===== */
+/* ===== ПОИСК ===== */
 .search-container {
     display: flex;
     gap: 10px;
@@ -387,11 +393,14 @@ input:focus, select:focus {
     .nav-wrapper {
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
     }
 
     .nav-links {
         justify-content: center;
+        flex-wrap: wrap;
         gap: 8px 12px;
+        flex: none;
     }
 
     .nav-links a {
@@ -403,14 +412,14 @@ input:focus, select:focus {
 
     .nav-auth {
         text-align: center;
-        margin-top: 5px;
+        justify-content: center;
+        margin-top: 0;
     }
 
     .stats-grid {
         grid-template-columns: 1fr;
     }
 
-    /* ===== ПОИСК ===== */
     .search-container {
         flex-direction: row;
         flex-wrap: wrap;
@@ -428,11 +437,9 @@ input:focus, select:focus {
         min-width: 80px;
     }
 
-    /* ===== КНОПКИ ДОБАВЛЕНИЯ ===== */
     .admin-only button {
         width: 100% !important;
         max-width: none !important;
-        min-width: auto !important;
         display: block !important;
     }
 
@@ -445,7 +452,6 @@ input:focus, select:focus {
         min-width: 500px;
     }
 
-    /* ===== КОНТАКТЫ ===== */
     .flex-grid {
         flex-direction: column;
         gap: 15px;
