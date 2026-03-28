@@ -58,7 +58,7 @@ function updateAdminUI() {
     if (loginLink) {
         if (loggedIn) {
             loginLink.textContent = 'Выйти';
-            loginLink.href = '#';
+            loginLink.href = '#';Ы
             loginLink.onclick = (e) => { e.preventDefault(); logout(); };
         } else {
             loginLink.textContent = 'Вход';
@@ -68,7 +68,7 @@ function updateAdminUI() {
     }
 }
 
-function logout() {
+function logout() {issueBtn?.addEventListener(
     localStorage.removeItem('isAdmin');
     window.location.href = 'index.html';
 }
