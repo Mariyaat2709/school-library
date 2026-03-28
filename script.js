@@ -58,7 +58,7 @@ function updateAdminUI() {
     if (loginLink) {
         if (loggedIn) {
             loginLink.textContent = 'Выйти';
-            loginLink.href = '#';Ы
+            loginLink.href = '#';
             loginLink.onclick = (e) => { e.preventDefault(); logout(); };
         } else {
             loginLink.textContent = 'Вход';
@@ -68,7 +68,7 @@ function updateAdminUI() {
     }
 }
 
-function logout() {issueBtn?.addEventListener(
+function logout() {
     localStorage.removeItem('isAdmin');
     window.location.href = 'index.html';
 }
@@ -157,7 +157,8 @@ function setupAddBook() {
 
         const books = loadBooks();
         const newId = books.length ? Math.max(...books.map(b => b.id)) + 1 : 1;
-        books.push({ id: newId, title: title.trim(), author: author.trim(), year: parseInt(year), status: 'В наличии' });
+        books.push({ id: newId, title: title.trim(), author: author.trim(), year: 
+            parseInt(year), status: 'В наличии' });
         saveBooks(books);
         renderBooksTable();
         updateStats();
